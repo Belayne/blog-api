@@ -45,10 +45,12 @@ class AuthController {
 				if (!match) {
 					return res.status(401).json({ message: "Auth failed" });
 				} else {
-					const token = jwt.sign({ username }, process.env.SECRET_KEY);
+					const token = jwt.sign({ sub: user.id }, process.env.SECRET_KEY, {
+						expiresIn: process.env.TOKEN_EXP,
+					});
 					return res.json({
 						message: "Auth success",
-						token,
+						token: "Bearer " + token,
 					});
 				}
 			} else {

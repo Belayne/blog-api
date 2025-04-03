@@ -15,7 +15,7 @@ async function verify(jwt_payload: any, done: Function) {
 		});
 
 		if (user) {
-			return done(null, user);
+			return done(null, { id: user.id, role: user.Role });
 		} else {
 			return done(null, false);
 		}

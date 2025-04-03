@@ -21,7 +21,7 @@ model Post {
   published Boolean    @default(false)
   authorId  String
   author    User       @relation(fields: [authorId], references: [id])
-  createdAt DateTime
+  createdAt DateTime   @default(now())
   comments  Comments[]
 }
 
@@ -30,6 +30,7 @@ model User {
   username String @unique
   password String
   Post     Post[]
+  Role     Role   @default(Guest)
 }
 
 model Comments {
@@ -39,4 +40,9 @@ model Comments {
   createdAt DateTime
   post      Post     @relation(fields: [postId], references: [id])
   postId    String
+}
+
+enum Role {
+  Owner
+  Guest
 }
