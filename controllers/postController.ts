@@ -38,6 +38,9 @@ class PostController {
 
 	createNewPost = async (req: Request, res: Response, next: NextFunction) => {
 		const { postTitle, postContent } = req.body;
+		if (!postTitle || !postContent) {
+			return res.status(400).json({ message: "Missing post data." });
+		}
 		try {
 			const post = await client.post.create({
 				data: {
@@ -52,7 +55,7 @@ class PostController {
 		} catch (error) {
 			next(error);
 		}
-		res.status(500).json({ message: "Error creating post" });
+		return res.status(500).json({ message: "Error creating post" });
 	};
 }
 

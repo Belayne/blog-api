@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 import dotenv from "dotenv";
 import configPassport from "./config/configPassport";
 import authRouter from "./routes/authRouter";
@@ -8,7 +7,6 @@ import postRouter from "./routes/postRouter";
 
 dotenv.config();
 configPassport();
-const __dirname = path.dirname("./");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
